@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  localstack:
+    container_name: localstack_cloudfront_iam_issue
+    image: localstack/localstack-pro:2.2.0
+    ports:
+      - "127.0.0.1:4566:4566" # LocalStack Gateway
+      - "127.0.0.1:4510-4559:4510-4559" # external services port range
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - LOCALSTACK_API_KEY=${LOCALSTACK_API_KEY- }
+      - LOCALSTACK_ENFORCE_IAM=1
+      # See https://github.com/localstack/localstack/issues/8837
+      - SQS_DISABLE_CLOUDWATCH_METRICS=1
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-~/.localstack-volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
