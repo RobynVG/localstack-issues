@@ -12,7 +12,9 @@ curl -X POST \
 
 Which will return:
 
-`{"data": {}, "errors": [{"message": "'FragmentSpreadNode' object has no attribute 'selection_set'", "locations": [{"line": 1, "column": 3}], "path": ["data"], "errorType": "AttributeError"}]}`
+```
+{"data": {}, "errors": [{"message": "'FragmentSpreadNode' object has no attribute 'selection_set'", "locations": [{"line": 1, "column": 3}], "path": ["data"], "errorType": "AttributeError"}]}
+```
 
 The query can be modified so that AppSync does not return an error by moving the fragment definition before the query definition as follows:
 
